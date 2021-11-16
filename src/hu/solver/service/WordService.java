@@ -1,7 +1,5 @@
 package hu.solver.service;
 
-import hu.solver.App;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -10,8 +8,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WordService {
-    public static final int MIN_LENGTH = App.MIN_LENGTH;
-    public static final int MAX_LENGTH = App.MAX_LENGTH;
 
     private final AnagramService anagramService;
 
@@ -19,15 +15,17 @@ public class WordService {
         this.anagramService = anagramService;
     }
 
-    public Set<String> getWords(String actual) {
+    public List<String> getWords(String actual) {
         return getKeys(actual).stream()
                 .map(anagramService::getWords)
                 .filter(i -> !i.isEmpty())
-                .collect(Collectors.toSet());
+                .distinct()
+                .sorted(Comparator.comparing(String::length))
+                .collect(Collectors.toList());
     }
 
-    private Set<String> getKeys(String actual) {
-        Set<String> keys = new HashSet<>();
+    private List<String> getKeys(String actual) {
+        List<String> keys = new ArrayList<>();
         keys.addAll(get3Letters(actual));
         keys.addAll(get4Letters(actual));
         if (actual.length() > 5) {
@@ -45,9 +43,8 @@ public class WordService {
         for (int l1 = 0; l1 < actual.length() - 2; l1++) {
             for (int l2 = l1 + 1; l2 < actual.length() - 1; l2++) {
                 for (int l3 = l2 + 1; l3 < actual.length(); l3++) {
-                    String word = String.valueOf(actual.charAt(l1)) +
-                            String.valueOf(actual.charAt(l2)) +
-                            String.valueOf(actual.charAt(l3));
+                    String word = String.valueOf(
+                            new char[]{actual.charAt(l1), actual.charAt(l2), actual.charAt(l3)});
                     words.add(word);
                 }
             }
@@ -61,10 +58,9 @@ public class WordService {
             for (int l2 = l1 + 1; l2 < actual.length() - 2; l2++) {
                 for (int l3 = l2 + 1; l3 < actual.length() - 1; l3++) {
                     for (int l4 = l3 + 1; l4 < actual.length(); l4++) {
-                        String word = String.valueOf(actual.charAt(l1)) +
-                                String.valueOf(actual.charAt(l2)) +
-                                String.valueOf(actual.charAt(l3)) +
-                                String.valueOf(actual.charAt(l4));
+                        String word = String.valueOf(
+                                new char[]{actual.charAt(l1), actual.charAt(l2),
+                                        actual.charAt(l3), actual.charAt(l4)});
                         words.add(word);
                     }
                 }
@@ -80,11 +76,9 @@ public class WordService {
                 for (int l3 = l2 + 1; l3 < actual.length() - 2; l3++) {
                     for (int l4 = l3 + 1; l4 < actual.length() - 1; l4++) {
                         for (int l5 = l4 + 1; l5 < actual.length(); l5++) {
-                            String word = String.valueOf(actual.charAt(l1)) +
-                                    String.valueOf(actual.charAt(l2)) +
-                                    String.valueOf(actual.charAt(l3)) +
-                                    String.valueOf(actual.charAt(l4)) +
-                                    String.valueOf(actual.charAt(l5));
+                            String word = String.valueOf(
+                                    new char[]{actual.charAt(l1), actual.charAt(l2),
+                                            actual.charAt(l3), actual.charAt(l4), actual.charAt(l5)});
                             words.add(word);
                         }
                     }
@@ -102,12 +96,9 @@ public class WordService {
                     for (int l4 = l3 + 1; l4 < actual.length() - 2; l4++) {
                         for (int l5 = l4 + 1; l5 < actual.length() - 1; l5++) {
                             for (int l6 = l5 + 1; l6 < actual.length(); l6++) {
-                                String word = String.valueOf(actual.charAt(l1)) +
-                                        String.valueOf(actual.charAt(l2)) +
-                                        String.valueOf(actual.charAt(l3)) +
-                                        String.valueOf(actual.charAt(l4)) +
-                                        String.valueOf(actual.charAt(l5)) +
-                                        String.valueOf(actual.charAt(l6));
+                                String word = String.valueOf(
+                                        new char[]{actual.charAt(l1), actual.charAt(l2), actual.charAt(l3),
+                                                actual.charAt(l4), actual.charAt(l5), actual.charAt(l6)});
                                 words.add(word);
                             }
                         }

@@ -1,10 +1,10 @@
 package hu.solver;
 
+import hu.solver.reader.FileReader;
+import hu.solver.reader.WordsReader;
 import hu.solver.service.AnagramService;
 import hu.solver.service.Console;
-import hu.solver.reader.FileReader;
 import hu.solver.service.WordService;
-import hu.solver.reader.WordsReader;
 
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class App {
 
     private final WordService wordService;
     private final Console console;
-    
+
     private App() {
         var wordsReader = new WordsReader(new FileReader());
         var anagramService = new AnagramService(wordsReader.getWords("hungarian_words.txt"));

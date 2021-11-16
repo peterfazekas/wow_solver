@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReader implements DataReader{
+public class FileReader implements DataReader {
 
     @Override
     public List<String> read(String input) {

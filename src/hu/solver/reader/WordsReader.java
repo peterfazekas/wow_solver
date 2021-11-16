@@ -1,7 +1,6 @@
 package hu.solver.reader;
 
 import hu.solver.App;
-import hu.solver.reader.DataReader;
 
 import java.util.List;
 import java.util.function.Predicate;
