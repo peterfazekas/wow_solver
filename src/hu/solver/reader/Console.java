@@ -1,4 +1,4 @@
-package hu.solver.service;
+package hu.solver.reader;
 
 import java.util.Scanner;
 

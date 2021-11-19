@@ -1,9 +1,9 @@
 package hu.solver;
 
+import hu.solver.reader.Console;
 import hu.solver.reader.FileReader;
 import hu.solver.reader.WordsReader;
 import hu.solver.service.AnagramService;
-import hu.solver.service.Console;
 import hu.solver.service.WordService;
 
 import java.util.Scanner;

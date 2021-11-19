@@ -18,7 +18,6 @@ public class AnagramService {
     }
 
     public String getWords(String key) {
-
         String anagram = getAnagram(key);
         List<String> elements = wordsMap.get(anagram);
         return elements != null ? String.join(", ", elements) : "";

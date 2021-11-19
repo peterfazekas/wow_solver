@@ -1,10 +1,10 @@
 package hu.solver.service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class WordService {
@@ -18,9 +18,8 @@ public class WordService {
     public List<String> getWords(String actual) {
         return getKeys(actual).stream()
                 .map(anagramService::getWords)
-                .filter(i -> !i.isEmpty())
+                .filter(hasValue())
                 .distinct()
-                .sorted(Comparator.comparing(String::length))
                 .collect(Collectors.toList());
     }
 
@@ -107,5 +106,9 @@ public class WordService {
             }
         }
         return words;
+    }
+
+    private Predicate<String> hasValue() {
+        return i -> !i.isEmpty();
     }
 }
