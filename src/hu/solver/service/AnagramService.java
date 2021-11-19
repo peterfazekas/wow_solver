@@ -18,20 +18,14 @@ public class AnagramService {
     }
 
     public String getWords(String key) {
-        String anagram = getAnagram(key);
-        List<String> elements = wordsMap.get(anagram);
+        var anagram = getAnagram(key);
+        var elements = wordsMap.get(anagram);
         return elements != null ? String.join(", ", elements) : "";
     }
 
     private Map<String, List<String>> initWordsMap(List<String> wordList) {
-        Map<String, List<String>> wordsMap = new HashMap<>();
-        wordList.forEach(word -> {
-            String key = getAnagram(word);
-            List<String> words = wordsMap.containsKey(key) ? wordsMap.get(key) : new ArrayList<>();
-            words.add(word);
-            wordsMap.put(key, words);
-        });
-        return wordsMap;
+        return wordList.stream()
+                .collect(Collectors.groupingBy(this::getAnagram));
     }
 
     public String getAnagram(String text) {

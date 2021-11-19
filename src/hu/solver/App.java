@@ -29,8 +29,11 @@ public class App {
 
     private void run() {
         System.out.println("Adatok beolvasva!");
-        System.out.println("Kérem adja meg a szót: ");
-        String actual = console.read();
-        System.out.println(wordService.getWords(actual));
+        String actual;
+        do {
+            System.out.print("Kérem adja meg a szót: ");
+            actual = console.read();
+            System.out.println(wordService.getWords(actual));
+        } while (actual.length() > 5);
     }
 }
