@@ -21,10 +21,15 @@ public class WordsReader {
         List<String> stringList = dataReader.read(input);
         return stringList.stream()
                 .filter(wordLengthIsCorrect())
+                .filter(charactersAreCorrect())
                 .collect(Collectors.toList());
     }
 
     private Predicate<String> wordLengthIsCorrect() {
         return word -> word.length() >= MIN_LENGTH && word.length() <= MAX_LENGTH;
+    }
+
+    private Predicate<String> charactersAreCorrect() {
+        return word -> !word.contains("-") || !word.contains(",") || !word.contains(" ");
     }
 }

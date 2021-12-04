@@ -2,10 +2,12 @@ package hu.solver;
 
 import hu.solver.reader.Console;
 import hu.solver.reader.FileReader;
+import hu.solver.reader.FileWriter;
 import hu.solver.reader.WordsReader;
 import hu.solver.service.AnagramService;
 import hu.solver.service.WordService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -18,7 +20,10 @@ public class App {
 
     private App() {
         var wordsReader = new WordsReader(new FileReader());
-        var anagramService = new AnagramService(wordsReader.getWords("hungarian_words.txt"));
+        List<String> words = wordsReader.getWords("words.txt");
+        var anagramService = new AnagramService(words);
+//        var writer = new FileWriter("words.txt");
+//        writer.write(words);
         console = new Console(new Scanner(System.in));
         wordService = new WordService(anagramService);
     }
